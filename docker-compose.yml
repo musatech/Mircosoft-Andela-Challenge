@@ -1,0 +1,21 @@
+# version of the decomposer version
+version: '3.0'
+
+# list of services and path to dockerfiles to run them 
+services:
+  api:
+    build: ./api
+    restart: always
+    # port mapping
+    ports:
+      - "3000:3000" 
+    links:
+      - database
+
+  database:
+    image: mongo
+    # port forwarding
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
